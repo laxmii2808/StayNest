@@ -17,7 +17,6 @@ const methodOverride= require("method-override");
 const passport= require("passport");
 const listingRoutes = require("./routes/listing.js");
 const userRoutes = require('./routes/user.js');
-
 const reviewRoutes = require("./routes/review.js");
 const User = require('./models/user.js');
 const LocalStrategy = require("passport-local");
@@ -50,7 +49,7 @@ const store = MongoStore.create({
    touchAfter : 24 * 60 * 60
  });
 
-store.on("error", (err) =>{
+store.on("error", () =>{
   console.log("ERROR IN MONGO SESSION STORE",err);
 });
 
@@ -64,7 +63,7 @@ const sessionOptions = {
       maxAge: 1000*60*60*24*7,
       httpOnly: true,
 
-    }
+    },
 };
 
 app.use(session(sessionOptions));
@@ -78,43 +77,26 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  console.log("Logged-in user:", req.user);
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
   next();
 });
 
-app.use((req, res, next) => {
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  res.locals.currentUser = req.user;
-  next();
+// Routes
+app.get("/", (req, res) => {
+  res.redirect("/listings");
 });
 
 app.use("/listings", listingRoutes);
 app.use("/listings/:id/reviews", reviewRoutes);
 app.use("/",userRoutes);
 
-// Routes
-app.get("/", (req, res) => {
-  res.send("Root is working");
-});
-
-
-//privacy
-app.get("/privacy", (req, res) => {
-  res.render("privacy");
-});
-
-//terms
-app.get("/terms", (req, res) => {
-  res.render("terms");
-});
-
 app.use((err, req, res, next) => {
-    let { statusCode = 500 } = err;
-    if (!err.message) err.message = "Something went wrong!";
-    res.status(statusCode).render("error", { err });
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = "Something went wrong!";
+  res.status(statusCode).render("listings/error", { err });
 });
-
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

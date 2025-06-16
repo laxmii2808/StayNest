@@ -1,91 +1,331 @@
-<% layout("layouts/boilerplate") %>
-
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-md-8 text-start">
-
-      <h3 class="card-title mb-3 text-center"><strong><%= listing.title %></strong></h3>
-
-      <div class="card shadow-sm listing-card">
-        <img src="<%= listing.image.url %>" class="card-img-top img-fluid" style="object-fit: cover; max-height: 400px;" alt="listing image">
-        <div class="card-body listing-card">
-          <p>Owned by <i> <%= listing.owner.username %></i></p>
-          <p class="card-text mt-3"><%= listing.description %></p>
-          <p>Category: <%= listing.category %></p>
-          <ul class="list-group list-group-flush mb-3">
-            <li class="list-group-item">Price: ₹ <%= listing.price.toLocaleString("en-IN") %></li>
-            <li class="list-group-item">Location: <%= listing.location %></li>
-            <li class="list-group-item">Country: <%= listing.country %></li>
-          </ul>
-            <div class="d-flex justify-content-center gap-3 mb-3">
-              <a href="/listings/<%= listing._id %>/edit" class="btn btn-primary">Edit</a>
-
-              <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" class="d-inline">
-                <button class="btn btn-danger">Delete</button>
-              </form>
+<% layout("/layouts/boilerplate") %>
+ <body>
+    <div class="row">
+        <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+            <!-- Title -->
+            <div class="mt-3">
+                <h3 class="listing-title"><%= listing.title %></h3>
             </div>
-         </div>
-      </div>
-      <!-- leave  a review section -->
-      <% if ( currentUser ) { %>
-      <div class="mt-5">
-        <hr />
-        <h4 class="mb-4 text-center">Leave a Review</h4>
-        <form action="/listings/<%= listing._id %>/reviews" method="POST" style="max-width: 100%;" novalidate>
-          <div class="mb-3 mt-4">
-            <label for="rating" class="form-label">Rating</label>
-            <fieldset class="starability-slot">
-            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
-            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-            <label for="first-rate1" title="Terrible">1 star</label>
-            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-            <label for="first-rate2" title="Not good">2 stars</label>
-            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-            <label for="first-rate3" title="Average">3 stars</label>
-            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-            <label for="first-rate4" title="Very good">4 stars</label>
-            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-            <label for="first-rate5" title="Amazing">5 stars</label>
-          </fieldset>
-          </div>
-          <div class="mb-3">
-            <label for="comment" class="form-label">Comments</label>
-            <textarea name="review[comment]" id="comment" rows="5" class="form-control" placeholder="ADD a review" required></textarea>
-            <div class="invalid-feedback">Comment is required.</div>
-          </div>
 
-          <div>
-            <button type="submit" class="btn btn-outline-dark">Submit</button>
-          </div>
-        </form>
-        <hr/>
-      </div>
-      <% } %>
+            <!-- Listing Card -->
+            <div class="card show-card listing-card">
+                <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing-img">
 
-      <!-- All Reviews -->
-      <div>
-        <h4 class="mb-4 text-center"><b>All Reviews</b></h4>
-        <div class="row">
-          <% for (let review of listing.reviews) { %>
-              <div class="card my-card shadow-sm mb-3 col-5 ms-3">
-                <div class="card-body">
-                  <p class="card-title"><%= review.author.username %></p>
-                  <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
-                  <p class="card-text"><%= review.comment %></p>
-                  <div class="row  row-cols-1 row-cols-md-2 g-3">
-                    <% if(currentUser && review.author._id.toString() === currentUser._id.toString()){ %>
-                    <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
-                    <div class="d-flex">
-                      <button type="submit" class="btn btn-dark mb-3">Delete</button>
+                    <div class="listing-card-body mt-3">
+                        <p class="listing-card-text">
+                            <b>Hosted By:</b> <i><%= listing.owner.username %></i>
+                        </p>
+                        <p class="listing-card-text">
+                            <b>Description:</b> <%= listing.description %>
+                        </p>
+                        <p class="listing-card-text">
+                            <b>Cost:</b> ₹<%= listing.price.toLocaleString("en-In") %>
+                        </p>
+                        <p class="listing-card-text">
+                            <b>Category:</b> <%= listing.category %>
+                        </p>
+                        <p class="listing-card-text">
+                            <b>Location:</b> <i class="fa-solid fa-location-dot"></i> <%= listing.location %>
+                        </p>
+                        <p class="listing-card-text">
+                            <b>Country:</b> <i class="fa-solid fa-globe"></i> <%= listing.country %>
+                        </p>
                     </div>
-                    </form>
-                    <% } %>
-                  </div>
+            </div>
+
+             <!-- Reserve Button -->
+            <div class="show-btns d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 mt-3">
+                <form action="/listings/<%= listing._id %>/reservelisting" method="GET">
+                <button class="btn btn-success reserve-btn">Reserve</button>
+                </form>
+            </div>
+
+            <!-- Edit/Delete Buttons for Owner -->
+            <% if (currUser && currUser._id.equals(listing.owner._id)) { %>
+                <div class="show-btns d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 mt-3">
+                <a href="/listings/<%= listing._id %>/edit" class="btn btn-danger mb-2 mb-md-0">Edit this Listing</a>
+                <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-dark">Delete this Listing</button>
+                </form>
                 </div>
-              </div>
             <% } %>
-          </div>
+
+            <!-- Leave a Review Section -->
+            <% if (currUser) { %>
+                <div class="col-6 offset-3 mt-4">
+                <hr>
+                </div>
+
+                <div class="mt-3">
+                <h4>Leave a Review</h4>
+                <form class="mt-3 needs-validation" novalidate action="/listings/<%= listing._id %>/reviews" method="POST">
+                    
+                    <!-- Rating -->
+                    <div class="mb-3">
+                    <label class="form-label" for="rating">Rating</label>
+                    <fieldset class="starability-slot">
+                        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                        <label for="first-rate1" title="Terrible">1 star</label>
+                        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                        <label for="first-rate2" title="Not good">2 stars</label>
+                        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                        <label for="first-rate3" title="Average">3 stars</label>
+                        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                        <label for="first-rate4" title="Very good">4 stars</label>
+                        <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                        <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>
+                    </div>
+
+                    <!-- Comment -->
+                    <div class="mb-3">
+                    <label class="form-label" for="comment">Comments</label>
+                    <textarea class="form-control" name="review[comment]" id="comment" cols="30" rows="5" required></textarea>
+                    <div class="invalid-feedback">Please add some comments for review</div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="show-btns d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3">
+                    <button class="btn btn-dark">Submit</button>
+                    </div>
+                </form>
+                </div>
+            <% } %>
+
+            <!-- Divider -->
+                <div class="col-6 offset-3">
+                <hr>
+                </div>
+
+                <!-- All Reviews Section -->
+            <% if (listing.reviews.length > 0) { %>
+                <div class="mt-3">
+                    <h4>All Reviews</h4>
+                    <div class="row justify-content-left">
+                        <% for (let review of listing.reviews) { %>
+                            <div class="col-12 col-md-6 col-lg-6 d-flex mt-3">
+                                <div class="card mb-1 flex-grow-1">
+                                    <div class="card-body d-flex flex-column justify-content-between">
+                                        <div>
+                                            <h5 class="card-title">
+                                            <i class="fa-solid fa-circle-user fa-lg" style="color: #ff0000;"></i>
+                                            <i><%= review.author.username %></i>
+                                            </h5>
+                                            <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
+                                            <p class="card-text review-comment"><%= review.comment %></p>
+                                        </div>
+
+                                        <!-- Delete Review Button -->
+                                        <% if (currUser && currUser._id.equals(review.author._id)) { %>
+                                            <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                                            <button class="btn btn-sm btn-danger mt-2">Delete</button>
+                                            </form>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+
+            <!-- Divider -->
+                <div class="col-6 offset-3">
+                    <hr>
+                </div>
+           <% } %>
+
+            <!-- Amenities Section -->
+            <div class="mt-3">
+                <h4>What this place offers</h4>
+                <div class="offers">
+                    <i class="ri-restaurant-line"><span> Kitchen</span></i>
+                    <i class="ri-car-fill"><span> Parking</span></i>
+                    <i class="ri-t-shirt-air-fill"><span> Air conditioning</span></i>
+                    <i class="ri-tv-2-line"><span> TV</span></i>
+                    <i class="ri-vidicon-line"><span> Security cameras</span></i>
+                    <i class="ri-wifi-line"><span> Wifi</span></i>
+                </div>
+
+            <!-- Button to open modal -->
+                <div class="d-flex justify-content-center mt-2">
+                    <button id="offers" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Show all amenities
+                    </button>
+                </div>
+
+            <!-- Modal for full amenities -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">What this place offers</h1>
+                            </div>
+                            <div class="modal-body">
+                                <ul>
+                                    <h5>Scenic views</h5>
+                                    <li>Lake view</li>
+                                    <li>Mountain view</li>
+                                    <li>Pool view</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Bathrooms</h5>
+                                    <li>Cleaning products</li>
+                                    <li>Shampoo</li>
+                                    <li>Hot Water</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Bedroom and laundry</h5>
+                                    <li>Essentials</li>
+                                    <li>Hangers</li>
+                                    <li>Bed linen</li>
+                                    <li>Robes and slippers</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Entertainment</h5>
+                                    <li>TV with standard cable/satellite</li>
+                                    <li>Sound system with Bluetooth and aux</li>
+                                    <li>Pool table</li>
+                                    <li>Board games</li>
+                                    <li>Books and magazines</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Outdoor</h5>
+                                    <li>Patio or balcony</li>
+                                    <li>Garden</li>
+                                    <li>Hammock</li>
+                                    <li>Firepit</li>
+                                    <li>BBQ grill</li>
+                                    <li>Bicycles</li>
+                                    <li>Canoes / Kayaks</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Kitchen and dining</h5>
+                                    <li>Dishes and cutlery</li>
+                                    <li>Barbecue utensils</li>
+                                    <li>Dining table</li>
+                                    <li>Freezer</li>
+                                    <li>Mini bar</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Location Features</h5>
+                                    <li>Waterfront</li>
+                                    <p>Right next to a body of water</p>
+                                    <li>Lake access</li>
+                                    <p>Guests can get to a lake using a path or dock</p>
+                                    <li>Private entrance</li>
+                                    <p>Separate street or building entrance</p>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Parking and Transport</h5>
+                                    <li>Free on-premises parking</li>
+                                    <li>Paid parking off-premises</li>
+                                    <li>EV charging station</li>
+                                    <li>Bike storage</li>
+                                    <li>Airport pickup/drop-off</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Safety and Security</h5>
+                                    <li>Smoke detector</li>
+                                    <li>Carbon monoxide detector</li>
+                                    <li>Fire extinguisher</li>
+                                    <li>First aid kit</li>
+                                    <li>Security cameras on property</li>
+                                    <li>Gated access</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Business & Connectivity</h5>
+                                    <li>High-speed Wi-Fi</li>
+                                    <li>Dedicated workspace</li>
+                                    <li>Printer / Scanner</li>
+                                    <li>Laptop-friendly desk</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Heating and Cooling</h5>
+                                    <li>Central air conditioning</li>
+                                    <li>Ceiling fan</li>
+                                    <li>Radiant floor heating</li>
+                                    <li>Portable fan</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Family & Kid-Friendly</h5>
+                                    <li>Crib</li>
+                                    <li>High chair</li>
+                                    <li>Baby bath</li>
+                                    <li>Toys</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Accessibility</h5>
+                                    <li>Step-free entrance</li>
+                                    <li>Wide doorways</li>
+                                    <li>Bathroom grab bars</li>
+                                    <li>Wheelchair-accessible shower</li>
+                                    <li>Elevator access</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Pet-friendly</h5>
+                                    <li>Pet bowls</li>
+                                    <li>Pet bed</li>
+                                    <li>Nearby pet-friendly parks</li>
+                                    <li>Pet waste bags</li>
+                                    <hr />
+                                </ul>
+                                <ul>
+                                    <h5>Extras</h5>
+                                    <li>Yoga mats</li>
+                                    <li>Massage chair</li>
+                                    <li>Star projector</li>
+                                    <li>Self check-in with keypad</li>
+                                    <hr />
+                                </ul>
+                            </div>
+
+
+                            <div class="modal-footer d-flex justify-content-center">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Divider -->
+            <div class="col-6 offset-3">
+            <hr>
+            </div>
+
+            <!-- Add-on Services Section -->
+            <div class="mt-3" id="services">
+                <h4>Add-on Services</h4>
+                <p>
+                    After booking this home, a trip designer can arrange any of these add-on services.
+                </p>
+
+                <div class="offers">
+                    <i class="ri-flight-takeoff-fill"><span> Airport Transfer</span></i>
+                    <i class="ri-goblet-line"><span> Butler</span></i>
+                    <i class="ri-luggage-cart-fill"><span> Pre-stocking</span></i>
+                    <i class="ri-hand-sanitizer-fill"><span> Cleaning</span></i>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="col-6 offset-3">
+             <hr>
+            </div>
         </div>
-      </div>
-   </div>
-</div>
+    </div>
+</body>

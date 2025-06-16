@@ -1,74 +1,240 @@
-<% layout("layouts/boilerplate") %>
+<% layout("/layouts/boilerplate") %>
 
-<body>
-  <div class="container mt-4">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
+  <body>
+    <div class="container mt-3">
+      <div class="row justify-content-center">
+        <div class="new-edit-form-inp">
+          <form action="/listings" method="post" novalidate class="needs-validation"
+              enctype="multipart/form-data">
+              <h3>Create a New Listing</h3>
+              <div class="mb-3">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="text" class="form-control" name="listing[title]" id="title"
+                      placeholder="Enter a Catchy Title" required>
+                  <div class="valid-feedback">Title looks good!</div>
+              </div>
+              <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea name="listing[description]" id="description" cols="30" rows="10"
+                      placeholder="Enter description" class="form-control" required></textarea>
+                  <div class="invalid-feedback">Please enter a short description</div>
+              </div>
+              <div class="mb-3">
+                  <label for="image" class="form-label">Upload Listing Image</label>
+                  <input type="file" name="image" id="image" class="form-control" required>
+                  <div class="invalid-feedback">Please select image to upload</div>
+              </div>
+              <div>
+                <label for="category" class="form-label">Choose Category</label>
+                <div class="category-choose"></div>
+                <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="trending" name="listing[category]" value="Trending" required>
+                        <label class="form-check-label d-flex align-items-center" for="trending">
+                          <i class="fa-solid fa-fire me-2"></i> Trending
+                        </label>
+                      </div>
 
-        <h3 class="mb-4">CREATE A NEW LISTING</h3>
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="rooms" name="listing[category]" value="Rooms" required>
+                        <label class="form-check-label d-flex align-items-center" for="rooms">
+                          <i class="fa-solid fa-bed me-2"></i> Rooms
+                        </label>
+                      </div>
 
-        <form method="POST" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data">
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="iconic-cities" name="listing[category]" value="Iconic cities" required>
+                        <label class="form-check-label d-flex align-items-center" for="iconic-cities">
+                          <i class="fa-solid fa-mountain-city me-2"></i> Iconic cities
+                        </label>
+                      </div>
 
-          <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input id="title" name="listing[title]" placeholder="Enter title" type="text" class="form-control"
-            required>
-            <div class="invalid-feedback">Enter a Title</div>
-          </div>
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="amazing-pool" name="listing[category]" value="Amazing pool" required>
+                        <label class="form-check-label d-flex align-items-center" for="amazing-pool">
+                          <i class="fa-solid fa-person-swimming me-2"></i> Amazing pool
+                        </label>
+                      </div>
 
-          <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <input id="description" name="listing[description]" placeholder="Enter description" type="text" class="form-control" required>
-            <div class="valid-feedback">Looks good!</div>
-          </div>
-          <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
-            <select class="form-control" id="category" name="listing[category]" required>
-              <option value="">-- Select Category --</option>
-              <option value="Trending">Trending</option>
-              <option value="Rooms">Rooms</option>
-              <option value="Iconic cities">Iconic cities</option>
-              <option value="Amazing pool">Amazing pool</option>
-              <option value="Farms">Farms</option>
-              <option value="Gym">Gym</option>
-              <option value="Beach">Beach</option>
-              <option value="Mountains">Mountains</option>
-              <option value="Camping">Camping</option>
-              <option value="Luxury">Luxury</option>
-              <option value="Winter">Winter</option>
-              <option value="Nature">Nature</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="image" class="form-label">Upload Image</label>
-            <input type="file" class="form-control" name="image" accept="image/*">
-          </div>
-          <div class="row">
-            <div class="mb-3 col-md-4">
-              <label for="price" class="form-label">Price (₹)</label>
-              <input id="price" name="listing[price]" placeholder="Enter price" type="number" class="form-control" required>
-              <div class="invalid-feedback">Price should be valid</div>
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="farms" name="listing[category]" value="Farms" required>
+                        <label class="form-check-label d-flex align-items-center" for="farms">
+                          <i class="fa-solid fa-tractor me-2"></i> Farms
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="gym" name="listing[category]" value="Gym" required>
+                        <label class="form-check-label d-flex align-items-center" for="gym">
+                          <i class="fa-solid fa-dumbbell me-2"></i> Gym
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="beach" name="listing[category]" value="Beach" required>
+                        <label class="form-check-label d-flex align-items-center" for="beach">
+                          <i class="fa-solid fa-umbrella-beach me-2"></i> Beach
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="mountains" name="listing[category]" value="Mountains" required>
+                        <label class="form-check-label d-flex align-items-center" for="mountains">
+                          <i class="fa-solid fa-mountain-sun me-2"></i> Mountains
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="camping" name="listing[category]" value="Camping" required>
+                        <label class="form-check-label d-flex align-items-center" for="camping">
+                          <i class="fa-solid fa-campground me-2"></i> Camping
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="luxury" name="listing[category]" value="Luxury" required>
+                        <label class="form-check-label d-flex align-items-center" for="luxury">
+                          <i class="fa-solid fa-hotel me-2"></i> Luxury
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="winter" name="listing[category]" value="Winter" required>
+                        <label class="form-check-label d-flex align-items-center" for="winter">
+                          <i class="fa-solid fa-snowflake me-2"></i> Winter
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="nature" name="listing[category]" value="Nature" required>
+                        <label class="form-check-label d-flex align-items-center" for="nature">
+                          <i class="fa-solid fa-tree me-2"></i> Nature
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="city" name="listing[category]" value="City" required>
+                        <label class="form-check-label d-flex align-items-center" for="city">
+                          <i class="fa-solid fa-city me-2"></i> City
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="historic" name="listing[category]" value="Historic" required>
+                        <label class="form-check-label d-flex align-items-center" for="historic">
+                          <i class="fa-solid fa-landmark me-2"></i> Historic
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="countryside" name="listing[category]" value="Countryside" required>
+                        <label class="form-check-label d-flex align-items-center" for="countryside">
+                          <i class="fa-solid fa-person-hiking me-2"></i> Countryside
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="lake" name="listing[category]" value="Lake" required>
+                        <label class="form-check-label d-flex align-items-center" for="lake">
+                          <i class="fa-solid fa-water me-2"></i> Lake
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="forest" name="listing[category]" value="Forest" required>
+                        <label class="form-check-label d-flex align-items-center" for="forest">
+                          <i class="fa-solid fa-tree-city me-2"></i> Forest
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="houseboat" name="listing[category]" value="Houseboat" required>
+                        <label class="form-check-label d-flex align-items-center" for="houseboat">
+                          <i class="fa-solid fa-ship me-2"></i> Houseboat
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="studio" name="listing[category]" value="Studio" required>
+                        <label class="form-check-label d-flex align-items-center" for="studio">
+                          <i class="fa-solid fa-house me-2"></i> Studio
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="palace" name="listing[category]" value="Palace" required>
+                        <label class="form-check-label d-flex align-items-center" for="palace">
+                          <i class="fa-solid fa-chess-rook me-2"></i> Palace
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="resort" name="listing[category]" value="Resort" required>
+                        <label class="form-check-label d-flex align-items-center" for="resort">
+                          <i class="fa-solid fa-home me-2"></i> Resort
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="retreat" name="listing[category]" value="Retreat" required>
+                        <label class="form-check-label d-flex align-items-center" for="retreat">
+                          <i class="fa-solid fa-seedling me-2"></i> Retreat
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="hotel" name="listing[category]" value="Hotel" required>
+                        <label class="form-check-label d-flex align-items-center" for="hotel">
+                          <i class="fa-solid fa-building me-2"></i> Hotel
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="villa" name="listing[category]" value="Villa" required>
+                        <label class="form-check-label d-flex align-items-center" for="villa">
+                          <i class="fa-solid fa-house-chimney me-2"></i> Villa
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="chalet" name="listing[category]" value="Chalet" required>
+                        <label class="form-check-label d-flex align-items-center" for="chalet">
+                          <i class="fa-solid fa-house-tsunami me-2"></i> Chalet
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" id="apartment" name="listing[category]" value="Apartment" required>
+                        <label class="form-check-label d-flex align-items-center" for="apartment">
+                          <i class="fa-solid fa-building-user me-2"></i> Apartment
+                        </label>
+                      </div>
+                <div class="invalid-feedback">Choose Category</div>
             </div>
-            <div class="mb-3 col-md-8">
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                  <input placeholder="Enter price" class="form-control" name="listing[price]" id="price"
+                    required>
+                <div class="invalid-feedback">Price should be valid</div>
+            </div>
+            <div class="mb-3">
               <label for="location" class="form-label">Location</label>
-              <input id="location" name="listing[location]" placeholder="Enter location" class="form-control" required>
-              <div class="invalid-feedback">Please provide  a location</div>
+              <input type="text" name="listing[location]" id="location" class="form-control"
+                placeholder="Enter location" required>
+              <div class="invalid-feedback">Location should be valid</div>
             </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="country" class="form-label">Country</label>
-            <input id="country" name="listing[country]" placeholder="Enter country" class="form-control" required>
-            <div class="invalid-feedback">Please provide a country name</div>
-          </div>
-          <button type="submit" class="btn mb-3" style="background-color: brown; color: white;">
-            Submit
-          </button>
-          <br />
-
+            <div class="mb-3">
+              <label for="country" class="form-label">Country</label>
+                <input type="text" name="listing[country]" id="country" class="form-control"
+                  placeholder="Enter country" required>
+              <div class="invalid-feedback">Country Name should be valid</div>
+            </div>
+            <button class="btn btn-dark add-btn mt-3">Add</button>
+            <br><br>
         </form>
-
+      </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>

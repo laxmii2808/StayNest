@@ -1,0 +1,18 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-3 fs-4"></i>
+        <div>
+          <h4 class="alert-heading mb-1">Oops! Something went wrong</h4>
+          <p class="mb-0"><%= err.message %></p>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a href="/listings" class="btn btn-dark">Go Back Home</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -27,7 +27,7 @@ module.exports.renderLoginForm = (req, res) => {
 };
 
 module.exports.loginUser = (req, res) => {
-  req.flash("success", "Welcome back!");
+  req.flash("success", "Welcome back to Wanderer!");
   const redirectUrl = res.locals.redirectUrl || "/listings";
   res.redirect(redirectUrl);
 };

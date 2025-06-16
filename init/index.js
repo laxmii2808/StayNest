@@ -1,18 +1,21 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 const initData = require("./data.js");  // contains data to be inserted
 const Listing = require("../models/listing.js"); // fixed path
 
 // Connect to DB
+const mongoUrl = process.env.ATLASDB_URL;
+
 main()
   .then(() => {
-    console.log("Connected to DB");
+    console.log("connected to DB");
   })
   .catch((err) => {
     console.log(err);
   });
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/Wanderer');
+  await mongoose.connect(mongoUrl);
 }
 
 // Initialize database

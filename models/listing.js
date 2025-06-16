@@ -10,10 +10,8 @@ const listingSchema = new Schema({
         type: String
     },
     image: {
-        type: {
-            url: String,
-            filename: String
-        }
+    url: String,
+    filename: String
     },
     price: {
         type: Number,
@@ -47,6 +45,10 @@ const listingSchema = new Schema({
     required: true
   },
 });
-
+listingSchema.post("findOneAndDelete", async (listing) => {
+  if (listing) {
+    await Review.deleteMany({ _id: { $in: listing.reviews } });
+  }
+});
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;
