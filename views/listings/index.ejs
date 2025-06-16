@@ -1,75 +1,5 @@
 <% layout("/layouts/boilerplate") %>
 
-<!-- <style>
-  .tax-info {
-    display: none;
-  }
-
-  #filter-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    overflow-x: auto;
-    position: relative;
-  }
-
-  .scroll-btn {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    height: 2rem;
-    width: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  #filters-container {
-    flex: 1;
-    overflow-x: auto;
-  }
-
-  #filters {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 1rem;
-  }
-
-  .filter a {
-    text-decoration: none;
-    color: inherit;
-    text-align: center;
-    font-size: 0.9rem;
-  }
-
-  .filter i {
-    font-size: 1.4rem;
-  }
-
-  .tax-toggle {
-    margin-left: auto;
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 1rem;
-    background-color: #f8f9fa;
-  }
-
-  .listing-card {
-    margin: 1rem 0;
-  }
-
-  .listing-card-body {
-    padding: 0.8rem;
-  }
-
-  .listing-index-img {
-    height: 16rem;
-    object-fit: cover;
-  }
-</style> -->
-
 <body>
   <div id="filter-wrapper">
     <button class="scroll-btn left-btn"><i class="fa-solid fa-less-than"></i></button>
@@ -143,21 +73,3 @@
         <% } %>
       </div> 
 </body>
-
-<script>
-  const taxToggle = document.getElementById("flexSwitchCheckDefault");
-  taxToggle.addEventListener("click", () => {
-    const taxLabels = document.getElementsByClassName("tax-info");
-    for (let label of taxLabels) {
-      label.style.display = label.style.display === "inline" ? "none" : "inline";
-    }
-  });
-
-  const filtersContainer = document.getElementById("filters-container");
-  document.querySelector(".left-btn").addEventListener("click", () => {
-    filtersContainer.scrollLeft -= 150;
-  });
-  document.querySelector(".right-btn").addEventListener("click", () => {
-    filtersContainer.scrollLeft += 150;
-  });
-</script>
