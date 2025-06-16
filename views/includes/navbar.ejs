@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-md bg-white sticky-top border-bottom">
+  <div class="container-fluid">
+
+    <!-- Brand -->
+    <a class="navbar-brand me-auto" href="/listings">
+      <i class="fa-solid fa-person-walking-luggage"></i>
+      <span class="fs-2 fw-bold logo-text">WANDERER</span>
+    </a>
+    <!-- search form -->
+    <div class="d-flex mx-auto">
+      <form class="d-flex justify-content-center" role="search">
+        <input class="form-control me-2 search-input" type="search"
+         placeholder="Explore Destinations" aria-label="Search" />
+        <button class="btn search-btn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>Search
+        </button>
+      </form>
+    </div>
+    <div class="navbar-nav ms-auto d-flex flex-row gap-2">
+
+      <a class="nav-link active" href="/listings"><i class="fa-solid fa-list"></i></a>
+
+      <% if (currentUser) { %>
+        <a class="nav-link active" href="/listings/new"><i class="fa-solid fa-plus"></i></a>
+        <a class="nav-link active ms-3" href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+      <% } else { %>
+        <a class="nav-link active ms-3" href="/signup"><i class="fa-solid fa-user-plus"></i></a>
+        <a class="nav-link active ms-2" href="/login"><i class="fa-solid fa-right-to-bracket"></i></a>
+      <% } %>
+
+    </div>
+
+  </div>
+</nav>

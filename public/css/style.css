@@ -1,0 +1,207 @@
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-optical-sizing: auto;
+  display:flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container{
+  flex:1;
+}
+
+.navbar {
+    height: 5rem;
+  }
+
+  .nav-link {
+    font-size: 3rem;
+    color:brown !important;
+  }
+
+  .navbar-brand i {
+    margin-right: 8px;
+  }
+
+  .fa-person-walking-luggage{
+    color: brown;
+    font-size: 3rem;
+    position: relative;
+  }
+  footer {
+  background-color: brown;
+  color: #f1f1f1;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.f-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.f-info-socials i {
+  font-size: 1.5rem;
+  margin: 0 10px;
+  color: #f1f1f1;
+  transition: color 0.3s ease;
+}
+
+.f-info-socials i:hover {
+  color: #0d6efd;
+  cursor: pointer;
+}
+
+.f-info-brand {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.f-info-links a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.f-info-links a:hover {
+  color: #ffffff;
+  text-decoration:underline;
+}
+
+.listing-card{
+  border:none !important;
+  margin-bottom: 2rem;
+
+}
+.card-img-top
+{
+  border-radius:  1rem !important;
+  width: 100% !important;
+  object-fit:cover !important;
+}
+.card-body{
+  padding: 0 !important;
+}
+.card-text{
+  font-weight: 400 !important;
+  color: black !important;
+}
+.listing-links{
+  text-decoration: none;
+}
+/* Overlay effect */
+.card-img-overlay{
+  opacity: 0;
+}
+.card-img-overlay:hover{
+  opacity:0.2;
+  background-color: white;
+
+}
+.show-image{
+  height:30vh;
+}
+.card-body {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.list-group-item {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.card-title,
+.card-text {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.review{
+   margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.my-card {
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+  border: 2px solid #343a40; /* dark border */
+  border-radius: 12px;
+  background-color: #f8f9fa; /* light gray */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.my-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.btn-dark {
+  border-radius: 8px;
+  padding: 8px 16px;
+}
+.category-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.2rem;
+  padding: 1rem;
+  white-space: nowrap;
+}
+
+.filter {
+  text-align: center;
+  flex: 0 0 auto;
+  color: #444;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.filter:hover {
+  color: black;
+}
+
+.active-filter {
+  font-weight: bold;
+  color: black;
+  border-bottom: 2px solid black;
+}
+
+.logo-text {
+  font-family: "Merriweather", serif;
+  letter-spacing: 1px;
+  font-optical-sizing: auto;
+  color:brown;
+  font-size: small;
+}
+.search-btn {
+  background-color: brown !important;
+  color: white !important;
+  border-radius: 40px !important;
+  transition: all 0.3s ease !important;
+  border-radius: 25px !important;
+  padding: 0 1rem 0 1rem !important;
+}
+
+.search-btn:hover {
+  background-color: brown !important; 
+  color: white !important;           
+  transform: scale(1.05)!important;  
+}
+
+.search-btn i {
+  display: inline !important;
+  margin-right: 0.5rem !important;
+  vertical-align: middle !important;
+  margin-right: 6px !important;
+}
+.search-input{
+  border-radius: 25px !important;
+  padding : 0.5rem 3rem 0.5rem 3rem !important;
+  font-size: 1rem !important;
+}
+

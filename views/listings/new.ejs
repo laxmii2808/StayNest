@@ -1,0 +1,74 @@
+<% layout("layouts/boilerplate") %>
+
+<body>
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+
+        <h3 class="mb-4">CREATE A NEW LISTING</h3>
+
+        <form method="POST" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data">
+
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input id="title" name="listing[title]" placeholder="Enter title" type="text" class="form-control"
+            required>
+            <div class="invalid-feedback">Enter a Title</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input id="description" name="listing[description]" placeholder="Enter description" type="text" class="form-control" required>
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-control" id="category" name="listing[category]" required>
+              <option value="">-- Select Category --</option>
+              <option value="Trending">Trending</option>
+              <option value="Rooms">Rooms</option>
+              <option value="Iconic cities">Iconic cities</option>
+              <option value="Amazing pool">Amazing pool</option>
+              <option value="Farms">Farms</option>
+              <option value="Gym">Gym</option>
+              <option value="Beach">Beach</option>
+              <option value="Mountains">Mountains</option>
+              <option value="Camping">Camping</option>
+              <option value="Luxury">Luxury</option>
+              <option value="Winter">Winter</option>
+              <option value="Nature">Nature</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Upload Image</label>
+            <input type="file" class="form-control" name="image" accept="image/*">
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="price" class="form-label">Price (₹)</label>
+              <input id="price" name="listing[price]" placeholder="Enter price" type="number" class="form-control" required>
+              <div class="invalid-feedback">Price should be valid</div>
+            </div>
+            <div class="mb-3 col-md-8">
+              <label for="location" class="form-label">Location</label>
+              <input id="location" name="listing[location]" placeholder="Enter location" class="form-control" required>
+              <div class="invalid-feedback">Please provide  a location</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input id="country" name="listing[country]" placeholder="Enter country" class="form-control" required>
+            <div class="invalid-feedback">Please provide a country name</div>
+          </div>
+          <button type="submit" class="btn mb-3" style="background-color: brown; color: white;">
+            Submit
+          </button>
+          <br />
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</body>
