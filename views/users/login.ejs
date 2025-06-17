@@ -1,24 +1,58 @@
 <% layout("/layouts/boilerplate") %>
+<style>
+    body {
+    background-color: #f8f9fa;
+    }
 
-    <body>
-        <div class="container mt-3">
-            <div class="row justify-content-center">
-                <div class="login-signup-form-inp">
-                    <h3 class="mb-3">Login on WanderLust</h3>
-                    <form action="/login" method="post" novalidate class="needs-validation">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" name="username" id="username"
-                                placeholder="Enter Username" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" id="password"
-                                placeholder="Enter Password" required>
-                        </div>
-                        <button class="btn btn-success">Login</button>
-                    </form>
-                </div>
+    .card {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    }
+
+    input::placeholder {
+    font-style: italic;
+    color: #6c757d;
+    }
+
+    .btn-success {
+    transition: 0.3s ease-in-out;
+    }
+
+    .btn-success:hover {
+    background-color: #23a356;
+    }
+
+    a.text-primary:hover {
+    text-decoration: underline;
+    }
+    
+</style>
+<body class="bg-light">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-4 p-4">
+          <h3 class="mb-4 text-center text-sign">Login on StayNest</h3>
+          <form action="/login" method="post" novalidate class="needs-validation">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" name="username" id="username"
+                placeholder="Enter Username" required>
             </div>
+            <div class="mb-4">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" name="password" id="password"
+                placeholder="Enter Password" required>
+            </div>
+            <div class="d-grid">
+              <button class="btn btn-success btn-lg" type="submit">Login</button>
+            </div>
+            <p class="mt-3 text-center">
+              Don't have an account? <a href="/signup" class="text-decoration-none text-primary">Sign up</a>
+            </p>
+          </form>
         </div>
-    </body>
+      </div>
+    </div>
+  </div>
+</body>

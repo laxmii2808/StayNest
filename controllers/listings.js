@@ -71,16 +71,15 @@ module.exports.renderEditForm = async (req, res) => {
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
   id = id.trim();
-  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
-  if (req.file) {
-    listing.image = {
-      url: req.file.path,
-      filename: req.file.filename,
-    };
-    await listing.save(); 
-  }
-  req.flash("success", "Listing updated!");
-  res.redirect(`/listings/${id}`);
+  let updatedListing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
+  if (typeof req.file !== "undefined") {
+  let url = req.file.path;
+  let filename = req.file.filename;
+  updatedListing.image = { url, filename };
+  await updatedListing.save();
+}
+req.flash("success", "Listing updated!");
+res.redirect(`/listings/${id}`);
 };
 
 module.exports.filter = async (req, res, next) => {
@@ -177,7 +176,7 @@ module.exports.search = async (req, res) => {
 module.exports.destroyListing = async (req, res) => {
   let { id } = req.params;
   id = id.trim();
-  let deletedListing = await Listing.findByIdAndDelete(id);
+  let deletedListing = await Listing.findOneAndDelete({ _id: id });
   req.flash("success", "Listing deleted!");
   res.redirect("/listings");
 };
