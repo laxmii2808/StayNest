@@ -1,12 +1,12 @@
-# 🏡 StayNest – Find Your Perfect Nest Anywhere
+# StayNest – Find Your Perfect Nest Anywhere
 
-Welcome to **StayNest**, my full-stack web application that helps people discover, list, and review beautiful vacation stays — from cozy cabins to scenic beach houses. Think of it like a simpler, developer-built version of Airbnb. 😊
+Welcome to **StayNest**, my full-stack web application that helps people discover, list, and review beautiful vacation stays — from cozy cabins to scenic beach houses. Think of it like a simpler, developer-built version of Airbnb. 
 
 This project is built using the **MERN Stack** and follows the **MVC (Model-View-Controller)** architecture to keep things modular, clean, and scalable.
 
 ---
 
-## ✨ What is StayNest?
+## What is StayNest?
 
 **StayNest** is a rental listing platform where:
 - Users can browse and search for vacation homes.
@@ -17,7 +17,7 @@ This project is built using the **MERN Stack** and follows the **MVC (Model-View
 
 ---
 
-## 🎯 Project Goals
+## Project Goals
 
 The aim of this project is to:
 - Practice full-stack web development using the MERN stack.
@@ -27,7 +27,7 @@ The aim of this project is to:
 
 ---
 
-## 🧱 Architecture – MVC (Model-View-Controller)
+## Architecture – MVC (Model-View-Controller)
 
 I’ve followed the **MVC design pattern** to separate concerns:
 
@@ -51,11 +51,11 @@ I’ve followed the **MVC design pattern** to separate concerns:
 
 ---
 
-## 🔁 CRUD Operations (Create, Read, Update, Delete)
+## CRUD Operations (Create, Read, Update, Delete)
 
 **StayNest** supports full CRUD functionality for listings and reviews:
 
-### 🏘 Listings
+### Listings
 | Action   | Method | Route              | Description                           |
 |----------|--------|--------------------|---------------------------------------|
 | Create   | POST   | `/listings`        | Add a new stay to the platform        |
@@ -64,7 +64,7 @@ I’ve followed the **MVC design pattern** to separate concerns:
 | Update   | PUT    | `/listings/:id`    | Edit your own listing                 |
 | Delete   | DELETE | `/listings/:id`    | Remove your own listing               |
 
-### ✍️ Reviews
+### Reviews
 | Action   | Method | Route                          | Description                      |
 |----------|--------|--------------------------------|----------------------------------|
 | Create   | POST   | `/listings/:id/reviews`        | Add a review to a listing        |
@@ -72,9 +72,9 @@ I’ve followed the **MVC design pattern** to separate concerns:
 
 ---
 
-## 🧪 Technologies Used
+## Technologies Used
 
-### 📦 Backend
+### Backend
 - **Node.js** and **Express.js** – For building APIs and handling server logic.
 - **MongoDB + Mongoose** – For database and schema modeling.
 - **Passport.js** – For authentication (login/register).
@@ -82,14 +82,14 @@ I’ve followed the **MVC design pattern** to separate concerns:
 - **Express-session & connect-flash** – For user sessions and messages.
 - **dotenv** – For managing environment variables securely.
 
-### 🖼 Frontend
+### Frontend
 - **EJS** – For rendering dynamic templates.
 - **Bootstrap 5** – For responsive design and pre-styled UI components.
 - **Custom CSS** – To fine-tune styling.
 
 ---
 
-## 🚦 How to Run Locally
+##  How to Run Locally
 
 ### 1. Clone the repository
 ```bash
