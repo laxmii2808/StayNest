@@ -95,3 +95,5 @@ I’ve followed the **MVC design pattern** to separate concerns:
 ```bash
 git clone https://github.com/laxmii2808/wanderer-app.git
 cd wanderer-app
+npm install
+
